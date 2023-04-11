@@ -18,10 +18,10 @@ import java.time.Duration;
 
 public class Login extends CommonMethods {
 
-    @Given("open the browser and launch HRMS application")
+    /*@Given("open the browser and launch HRMS application")
     public void open_the_browser_and_launch_hrms_application() {
         openBrowserAndLaunchApplication();
-    }
+    }*/
 
     @When("user enters valid email and valid password")
     public void user_enters_valid_email_and_valid_password() {
@@ -48,8 +48,18 @@ public class Login extends CommonMethods {
         }
     }
 
-    @Then("close the browser")
+    @When("user enters valid username {string} and valid password {string}")
+    public void user_enters_valid_username_and_valid_password(String username, String password) {
+        WebElement usernameTextBox=driver.findElement(By.id("txtUsername"));
+        sendText(usernameTextBox,username);
+
+        WebElement passwordTextBox = driver.findElement(By.id("txtPassword"));
+        sendText(passwordTextBox, password);
+    }
+
+
+    /*@Then("close the browser")
     public void close_the_browser() {
         closeBrowser();
-    }
+    }*/
 }
