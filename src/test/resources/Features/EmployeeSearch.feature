@@ -29,3 +29,16 @@ Feature: Searching the employee
 
 
   #Background: This is used to define all the common steps that multiple scenarios have in the same feature file, till the time flow is not broken
+  #          : It's the clubbing of common steps in different scenarios of a feature file till flow is not broken
+  # 1. Hard code
+  # 2. Config file
+  # -------- Cucumber itself provides multiple option through which we can feed data from
+  # feature file into Step Definition-----------
+  # 3. Regular Expressions
+       # put the data in double quotes [""]
+  # 4. Scenario Outline
+       # Provides you an alternative to Data driven testing
+       # Also supports parameterization
+
+  #=================PARAMETERIZATION=========================
+  # Executing the same test case with multiple data
