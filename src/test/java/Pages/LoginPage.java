@@ -10,6 +10,8 @@ public class LoginPage extends CommonMethods {
 
     public LoginPage(){
         PageFactory.initElements(driver,this);
+        // initializing all WebElements on this page with driver
+        // Initializing the webElements of the current page
     }
     @FindBy(id="txtUsername")
     public WebElement usernameTextBox;

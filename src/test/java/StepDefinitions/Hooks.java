@@ -3,6 +3,7 @@ package StepDefinitions;
 import Utils.CommonMethods;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.junit.Cucumber;
 
 public class Hooks extends CommonMethods {
@@ -10,8 +11,20 @@ public class Hooks extends CommonMethods {
     public void preCondition(){
         openBrowserAndLaunchApplication();
     }
+
+    // Scenario class holds te complete information of your tests execution in Cucumber Framework
     @After
-    public void postCondition(){
+    public void postCondition(Scenario scenario){
+        byte[] pic;
+        if(scenario.isFailed()){
+            pic=takeScreenshot("failed/"+scenario.getName());
+        }else {
+            pic=takeScreenshot("passed/"+scenario.getName());
+        }
+
+        // attach the screenshot in my report
+        scenario.attach(pic, "image/png", scenario.getName());
+
         closeBrowser();
     }
 
