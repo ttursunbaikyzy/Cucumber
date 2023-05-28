@@ -31,6 +31,7 @@ public class APIWorkflowSteps {
                 body(APIPayloadConstants.createEmployeePayload());
     }
 
+
     // another request making with json payload
     @Given("a request is prepared to create an employee using json payload")
     public void a_request_is_prepared_to_create_an_employee_using_json_payload() {
@@ -60,6 +61,7 @@ public class APIWorkflowSteps {
         employee_id=response.jsonPath().getString(empID);
         System.out.println(employee_id);
     }
+
 
     // below are the steps to get created employee
     @Given("a request is prepared to get the created employee")
@@ -101,6 +103,30 @@ public class APIWorkflowSteps {
         }
 
     }
+
+
+    @Given("a request is prepared to create an employee with dynamic data {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public void a_request_is_prepared_to_create_an_employee_with_dynamic_data(String firstName, String lastName, String middleName, String gender, String birthday, String status, String jobTitle) {
+        request = given().header(APIConstants.HEADER_KEY_CONTENT_TYPE,APIConstants.HEADER_VALUE_CONTENT_TYPE).
+                header(APIConstants.HEADER_KEY_AUTHORIZATION, GenerateTokenSteps.token).
+                body(APIPayloadConstants.createEmployeePayLoadDynamic(firstName,lastName,middleName,gender, birthday,status,jobTitle));
+    }
+
+    @Given("a request is prepared to update an employee")
+    public void a_request_is_prepared_to_update_an_employee() {
+        request = given().header(APIConstants.HEADER_KEY_CONTENT_TYPE,APIConstants.HEADER_VALUE_CONTENT_TYPE).
+                header(APIConstants.HEADER_KEY_AUTHORIZATION, GenerateTokenSteps.token).
+                body(APIPayloadConstants.updateEmployeePayLoadJson());
+    }
+    @When("a PUT call is made to update an employee")
+    public void a_PUT_call_is_made_to_update_an_employee() {
+        response = request.when().put(APIConstants.UPDATE_EMPLOYEE_URI);
+    }
+    @Then("the status code updated employee is {int}")
+    public void the_status_code_updated_employee_is(Integer int1) {
+        response.then().assertThat().statusCode(int1);
+    }
+
 
 
 }
